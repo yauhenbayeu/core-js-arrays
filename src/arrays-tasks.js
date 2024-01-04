@@ -20,9 +20,21 @@
  *    getIntervalArray(0, 100) => [ 0, 1, 2, ..., 100 ]
  *    getIntervalArray(3, 3) => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  const arr = Array.from(
+    { length: end - start + 1 },
+    (x, index) => start + index
+  );
+  // for (let i = start; i <= end; i += 1) {
+  //   arr.push(i);
+  // }
+  // console.log(arr);
+  return arr;
 }
+// getIntervalArray(1, 5);
+// getIntervalArray(-2, 2);
+// getIntervalArray(0, 100);
+// getIntervalArray(3, 3);
 
 /**
  * Returns a new array where each element is the sum of the corresponding elements
@@ -37,9 +49,19 @@ function getIntervalArray(/* start, end */) {
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function sumArrays(arr1, arr2) {
+  const arrLength = arr1.length > arr2.length ? arr1.length : arr2.length;
+  const arr = Array.from(
+    { length: arrLength },
+    (x, index) =>
+      (arr1[index] ? arr1[index] : 0) + (arr2[index] ? arr2[index] : 0)
+  );
+  // console.log(arr);
+  return arr;
 }
+// sumArrays([1, 2, 3], [4, 5, 6]);
+// sumArrays([10, 20, 30], [5, 10, 15]);
+// sumArrays([-1, 0, 1], [1, 2, 3, 4]);
 
 /**
  * Returns an index of the specified element in array or -1 if element is not found.
@@ -53,8 +75,8 @@ function sumArrays(/* arr1, arr2 */) {
  *    findElement(['Array', 'Number', 'string'], 'Date') => -1
  *    findElement([0, 1, 2, 3, 4, 5], 5) => 5
  */
-function findElement(/* arr, value */) {
-  throw new Error('Not implemented');
+function findElement(arr, value) {
+  return arr.indexOf(value);
 }
 
 /**
@@ -71,9 +93,16 @@ function findElement(/* arr, value */) {
  *    findAllOccurrences([ null, undefined, null ], null) => 2
  *    findAllOccurrences([ true, 0, 1, 'true' ], true) => 1
  */
-function findAllOccurrences(/* arr, item */) {
-  throw new Error('Not implemented');
+function findAllOccurrences(arr, item) {
+  const result = arr.filter((elem) => elem === item);
+  // console.log(result.length);
+  return result.length;
 }
+// findAllOccurrences([0, 0, 1, 1, 1, 2], 1);
+// findAllOccurrences([1, 2, 3, 4, 5], 0);
+// findAllOccurrences(['a', 'b', 'c', 'c'], 'c');
+// findAllOccurrences([null, undefined, null], null);
+// findAllOccurrences([true, 0, 1, 'true'], true);
 
 /**
  * Removes falsy values from the specified array.
