@@ -379,8 +379,16 @@ function selectMany(arr, childrenSelector) {
  *   calculateBalance([ [ 10, 8 ], [ 1, 5 ] ])  => (10 - 8) + (1 - 5) = 2 + -4 = -2
  *   calculateBalance([]) => 0
  */
-function calculateBalance(/* arr */) {
-  throw new Error('Not implemented');
+function calculateBalance(arr) {
+  if (arr.length === 0) {
+    return 0;
+  }
+  let sum = 0;
+  arr.map((el) => {
+    sum += el[0] - el[1];
+    return el;
+  });
+  return sum;
 }
 
 /**
@@ -395,8 +403,13 @@ function calculateBalance(/* arr */) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  const resultArr = Array.from(
+    { length: Math.ceil(arr.length / chunkSize) },
+    (_, i) => arr.slice(i * chunkSize, (i + 1) * chunkSize)
+  );
+
+  return resultArr;
 }
 
 /**
@@ -411,8 +424,14 @@ function createChunks(/* arr, chunkSize */) {
  *    generateOdds(2) => [ 1, 3 ]
  *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  if (!len) {
+    return [];
+  }
+
+  return Array.from({ length: len }, (_, index) => {
+    return index * 2 + 1;
+  });
 }
 
 /**
@@ -427,9 +446,21 @@ function generateOdds(/* len */) {
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(/* arr, indices */) {
-  throw new Error('Not implemented');
+function getElementByIndices(arr, indices) {
+  const resultArr = indices.reduce((result, i) => result[i], arr);
+  // console.log(resultArr);
+  return resultArr;
 }
+// getElementByIndices(
+//   [
+//     [1, 2],
+//     [3, 4],
+//     [5, 6],
+//   ],
+//   [0, 0]
+// );
+// getElementByIndices(['one', 'two', 'three'], [2]);
+// getElementByIndices([[[1, 2, 3]]], [0, 0, 1]);
 
 /**
  * Returns the number of all falsy values in the specified array.
@@ -443,8 +474,14 @@ function getElementByIndices(/* arr, indices */) {
  *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  let result = 0;
+
+  arr.map((i) => {
+    if (!i) result += 1;
+    return i;
+  });
+  return result;
 }
 
 /**
@@ -465,9 +502,17 @@ function getFalsyValuesCount(/* arr */) {
  *                              [0,0,0,1,0],
  *                              [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array.from({ length: n }, (_, i) => {
+    return Array.from({ length: n }, (__, j) => {
+      if (j === i) return 1;
+      return 0;
+    });
+  });
 }
+// console.log(getIdentityMatrix(1));
+// console.log(getIdentityMatrix(2));
+// console.log(getIdentityMatrix(5));
 
 /**
  * Returns an array containing indices of odd elements in the input array.
@@ -480,8 +525,14 @@ function getIdentityMatrix(/* n */) {
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(numbers) {
+  const resultArr = [];
+  numbers.map((item, i) => {
+    if (item % 2 !== 0) resultArr.push(i);
+    return item;
+  });
+
+  return resultArr;
 }
 
 /**
@@ -494,9 +545,17 @@ function getIndicesOfOddNumbers(/* numbers */) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  let resultArr = [];
+  resultArr = arr.map((value) => {
+    // console.log(`${value.toString(16).toUpperCase()}`);
+    const hex = `#${value.toString(16).toUpperCase().padStart(6, '0')}`;
+    return hex;
+  });
+
+  return resultArr;
 }
+// getHexRGBValues([0, 255, 16777215]);
 
 /**
  * Returns the n largest values from the specified array
@@ -512,9 +571,13 @@ function getHexRGBValues(/* arr */) {
  *   getMaxItems([ 10, 2, 7, 5, 3, -5 ], 3) => [ 10, 7, 5 ]
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
-function getMaxItems(/* arr, n */) {
-  throw new Error('Not implemented');
+function getMaxItems(arr, n) {
+  const resultArr = arr.sort((a, b) => b - a);
+
+  // console.log(arr.sort((a, b) => b - a));
+  return resultArr.slice(0, n);
 }
+// getMaxItems([10, 2, 7, 5, 3, -5], 3);
 
 /**
  * Finds and returns an array containing only the common elements found in two arrays.
@@ -528,9 +591,17 @@ function getMaxItems(/* arr, n */) {
  *    findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']) => [ 'b', 'c' ]
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
-function findCommonElements(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function findCommonElements(arr1, arr2) {
+  const resultArr = [];
+  arr1.map((item) => {
+    if (arr2.includes(item)) resultArr.push(item);
+    return item;
+  });
+  return resultArr;
 }
+// findCommonElements([1, 2, 3], [2, 3, 4]);
+// findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']);
+// findCommonElements([1, 2, 3], ['a', 'b', 'c']);
 
 /**
  * Finds the length of the longest increasing subsequence of a given array of integers.
